@@ -5,4 +5,4 @@ import { Oso } from './Oso.js'
 import { Serpiente } from './Serpiente.js'
 import { Aguila } from './Aguila.js'
 
-export default { Animal, Leon, Lobo, Oso, Serpiente, Aguila }
+export { Animal, Leon, Lobo, Oso, Serpiente, Aguila }

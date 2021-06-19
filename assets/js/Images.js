@@ -1,5 +1,6 @@
 import db from './Data.js'
 
+//Interacción con la imagenes
 
 const animal = document.getElementById('animal');
 const preview = document.getElementById('preview');
