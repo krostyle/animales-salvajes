@@ -13,6 +13,7 @@ animal.addEventListener('change', async() => {
     const animalImage = animalSelected.imagen;
     const animalPath = `./assets/imgs/${animalImage}`;
     createImage(animalPath)
+    console.log(animalPath);
 })
 
 

@@ -11,7 +11,9 @@ export class Animal {
         this.getEdad = () => _edad;
         this.getImg = () => _img;
         this.getComentarios = () => _comentarios;
-        this.getSonido = () => _sonido
+        this.getSonido = () => {
+            return _sonido
+        }
 
         //Setters
 
