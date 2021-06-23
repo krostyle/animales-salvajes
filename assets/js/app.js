@@ -40,11 +40,12 @@ btnRegistrar.addEventListener('click', async(e) => {
                 animal = new Aguila(nombre.value, edad.value, urlImg, comentarios.value, srcSonidoAnimal)
                 break;
         }
+
         // console.log(animal);
         animalsSelected.push(animal)
             // console.log(animalsSelected);
         createCards(animalsSelected)
-        createModal(nombre.value, urlImg, edad.value, comentarios.value)
+        createModal(animalsSelected)
         cleanForm(nombre, edad, comentarios, bgImgE);
     } else {
         alert('Favor completar todos los datos')
@@ -77,12 +78,12 @@ const cleanForm = (nombre, edad, comentarios, bgImgE) => {
 const createCards = (listaAnimales) => {
     tableAnimals.innerHTML = ''
         // console.log(listaAnimales);
-    listaAnimales.forEach(animal => {
+    listaAnimales.forEach((animal, i) => {
         tableAnimals.innerHTML +=
             /*HTML*/
             `
             <div class="card text-white bg-secondary m-3">
-            <img type ="button "style="width: 10rem;" src="${animal.img}" class="card-img-top" data-bs-toggle="modal" data-bs-target="#${animal.nombre}">
+            <img type ="button "style="width: 10rem;" src="${animal.img}" class="card-img-top" data-bs-toggle="modal" data-bs-target="#${animal.nombre}-${i}">
             <div class="card-body p-1" onclick="playSounds('${animal.sonido}')">
             <a href="#"><img class="p-1" height="30rem" src="./assets/imgs/audio.svg"/></a>
             </div>
@@ -97,32 +98,35 @@ window.playSounds = (sound) => {
     sonido.play();
 }
 
-const createModal = (nombre, img, edad, comentarios) => {
-    console.log('OK');
-    const modal =
-        `
-    <!-- Modal ${nombre} -->
-    <div class="modal fade" id="${nombre}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content bg-dark text-white">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">${nombre}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+const createModal = (listaAnimales) => {
+    const modales = document.getElementById('modales');
+    modales.innerHTML = "";
+    listaAnimales.forEach((animal, i) => {
+        modales.innerHTML +=
+            `
+        <!-- Modal ${animal.nombre} - ${i} -->
+        <div class="modal fade" id="${animal.nombre}-${i}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content bg-dark text-white">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">${animal.nombre}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <img src="${animal.img}" class="img-fluid">
+                <hr>
+                <h5>Edad</h5>
+                <p>${animal.edad}</p>
+                <hr>
+                <h5>Comentarios</h5>
+                <p>${animal.comentarios}</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
           </div>
-          <div class="modal-body">
-            <img src="${img}" class="img-fluid">
-            <hr>
-            <h5>Edad</h5>
-            <p>${edad}</p>
-            <hr>
-            <h5>Comentarios</h5>
-            <p>${comentarios}</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          </div>
-        </div>
-      </div>
-    </div>`
-    document.getElementById('modales').innerHTML += modal;
+        </div>`
+    })
+
 }
