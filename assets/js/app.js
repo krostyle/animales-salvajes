@@ -79,6 +79,8 @@ const createCards = (listaAnimales) => {
     tableAnimals.innerHTML = ''
         // console.log(listaAnimales);
     listaAnimales.forEach((animal, i) => {
+        console.log(animal);
+        console.log(i);
         tableAnimals.innerHTML +=
             /*HTML*/
             `
@@ -102,6 +104,8 @@ const createModal = (listaAnimales) => {
     const modales = document.getElementById('modales');
     modales.innerHTML = "";
     listaAnimales.forEach((animal, i) => {
+        console.log(animal);
+        console.log(i);
         modales.innerHTML +=
             `
         <!-- Modal ${animal.nombre} - ${i} -->
