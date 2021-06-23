@@ -1,5 +1,5 @@
 const db = (() => {
-    const URL = '../../animales.json';
+    const URL = './animales.json';
     const getData = async() => {
         const res = await fetch(URL);
         const data = await res.json();
